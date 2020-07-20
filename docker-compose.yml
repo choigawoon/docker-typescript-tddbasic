@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  example-node:
+    stdin_open: true  # docker run -i
+    tty: true         # docker run -t
+    build: .
+      #dockerfile찾을 곳
+      #context: /usr/src/app
+    volumes:
+      # 호스트OS 디렉토리를 마운트시켜서 데이터를 관리할 수도 있지만, 호스트쪽 디렉토리에 의존이 생기고 만약 이 디렉토리의 데이터를 잘못 손대면 애플리케이션에 부정적 영향을 미칠 수 있기 때문에 이 방식은 사용하지 않는것이 좋다
+      - F:\DockerWorks-Linux\nodejs\node-base\app:/usr/src/app
+      - /usr/src/app/node_modules
+      # 볼륨 컨테이너를 사용하자. 아래와 같이!
+      # https://joont92.github.io/docker/volume-container-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0/
+      #- /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+      - 9229:9229
+    # DockerFile의 entrypoint를 덮어쓴다. override
+    # workdir override
+    working_dir: /usr/src/app
+    entrypoint: ls
+    # DockerFile의 cmd를 덮어쓴다. override
+    #command:
+    #  - ls
+
+    # compose에서 바로 bin/bash로 연결되진 못함. docker-compose가 생성해준 도커 컨테이너로 접속은 가능. docker exec -ti (node-base_example-node_1) /bin/bash -> 잘못알았네. 밑에 방법으로 된다.
+    # docker-compose exec (example-node) /bin/bash
