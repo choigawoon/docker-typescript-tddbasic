@@ -1,5 +1,8 @@
 FROM node:14
 
+# 포트열기
+EXPOSE 3000
+
 # 환경변수설정
 ARG NODE_ENV=development
 ENV NODE_ENV=${NODE_ENV}
@@ -11,6 +14,6 @@ RUN apt-get update && apt-get install apt-file -y && apt-file update && apt-get 
 #RUN npm install -g ngrok
 RUN npm install -g typescript
 
-ENTRYPOINT [ "/bin/bash" ]
-#ENTRYPOINT [ "/bin/sh" ]
-#CMD [ "npm", "install" ]
+#ENTRYPOINT [ "/bin/bash" ]
+ENTRYPOINT [ "npm" ]
+CMD [ "start" ]

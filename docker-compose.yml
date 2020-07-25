@@ -15,8 +15,8 @@ services:
       # https://joont92.github.io/docker/volume-container-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0/
       #- /usr/src/app/node_modules
     ports:
-      - 3000:3000
-      - 9229:9229
+      - "3000:3000"
+      - "9229:9229"
     # DockerFile의 entrypoint를 덮어쓴다. override
     # workdir override
     working_dir: /usr/src/app
@@ -27,3 +27,13 @@ services:
 
     # compose에서 바로 bin/bash로 연결되진 못함. docker-compose가 생성해준 도커 컨테이너로 접속은 가능. docker exec -ti (node-base_example-node_1) /bin/bash -> 잘못알았네. 밑에 방법으로 된다.
     # docker-compose exec (example-node) /bin/bash
+
+    # 20200726실행
+    # https://stackoverflow.com/questions/36489696/cannot-link-to-a-running-container-started-by-docker-compose
+    # ngrok만 쓸 때
+    # # 외부에서 로컬에서 실행한 웹서버를 접근하기 위해 ngrok 사용
+    # http 로 3000 포트를 외부로 연결시킨다는 옵션
+    # $ ngrok http 3000
+    # 외부에서 5c943fb2.ngrok.io 로 접속 시 localhost:3000 으로 연결시켜줌
+    # Forwarding     http://5c943fb2.ngrok.io -> http://localhost:3000
+    # docker run --rm -it --link docker-typescript-tddbasic_typescript-getstarted_1 --net docker-typescript-tddbasic_default wernight/ngrok ngrok http 3000
