@@ -8,7 +8,7 @@ ENV NODE_ENV=${NODE_ENV}
 RUN apt-get update && apt-get install apt-file -y && apt-file update && apt-get install vim -y
 
 # npm global install은 DockerFile로
-RUN npm install -g ngrok
+#RUN npm install -g ngrok
 RUN npm install -g typescript
 
 ENTRYPOINT [ "/bin/bash" ]
