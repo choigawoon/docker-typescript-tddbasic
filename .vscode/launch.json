@@ -1,0 +1,46 @@
+{
+    // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+    // 기존 특성에 대한 설명을 보려면 가리킵니다.
+    // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "타입스크립트 디버깅",
+        "type": "node",
+        "request": "launch",
+        //"args": ["${relativeFile}"],  // cwd를 /app으로 설정하면서 안맞음
+        "args": ["src/index.ts"],
+        "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+        "sourceMaps": true,
+        "cwd": "${workspaceFolder}/app",
+        "protocol": "inspector",
+      },
+      {
+        "name": "NODEMON 타입스크립트 디버깅",
+        "type": "node",
+        "request": "launch",
+        "runtimeExecutable": "nodemon",
+        "runtimeArgs": ["--exec", "ts-node"],
+        //"args": ["${relativeFile}"],
+        "args": ["src/index.ts"],
+        "restart": true,
+        "sourceMaps": true,
+        "cwd": "${workspaceFolder}/app",
+        "protocol": "inspector",
+        //"localRoot": "${workspaceFolder}/app"
+      },
+      {
+        "name": "Docker: Attach to Node",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "address": "localhost",
+        "sourceMapPathOverrides": {
+            "/app/*": "${workspaceFolder}/*"
+          },
+        "localRoot": "${workspaceFolder}",
+        "remoteRoot": "/",
+        "protocol": "inspector"
+      }
+    ],
+}
