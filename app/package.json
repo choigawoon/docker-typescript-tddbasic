@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require ts-node/register test/**/*.ts",
-    "debug": "node -r ts-node/register --inspect=0.0.0.0:9229 src/index.ts",
+    "debug": "nodemon --exec node -r ts-node/register --inspect=0.0.0.0:9229 src/index.ts",
     "start": "nodemon --exec ts-node src/index.ts"
   },
   "keywords": [],

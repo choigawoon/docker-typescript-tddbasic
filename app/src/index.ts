@@ -37,7 +37,13 @@ slackEvents.on('message', async (event) => {
       webClient.chat.postMessage({
         text: '절 만들어주신 분이군요!',
         channel: event.channel,
-    });
+      });
+    }
+    else if (event.text == '최윤슬') {
+      webClient.chat.postMessage({
+        text: '아가',
+        channel: event.channel,
+      });
     }
 });
 

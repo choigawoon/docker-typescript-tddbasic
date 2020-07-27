@@ -18,3 +18,4 @@ RUN npm install -g typescript
 ENTRYPOINT [ "npm" ]
 #CMD [ "start" ]
 CMD [ "run", "debug" ]
+#CMD [ "run", "start" ]

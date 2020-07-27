@@ -8,7 +8,7 @@
         "name": "타입스크립트 디버깅",
         "type": "node",
         "request": "launch",
-        //"args": ["${relativeFile}"],  // cwd를 /app으로 설정하면서 안맞음
+        // "args": ["${relativeFile}"],  // cwd를 /app으로 설정하면서 안맞음
         "args": ["src/index.ts"],
         "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
         "sourceMaps": true,
@@ -30,17 +30,18 @@
         //"localRoot": "${workspaceFolder}/app"
       },
       {
-        "name": "Docker: Attach to Node",
+        "name": "도커컨테이너: 타입스크립트 디버깅",
         "type": "node",
         "request": "attach",
         "port": 9229,
         "address": "localhost",
         "sourceMapPathOverrides": {
-            "/app/*": "${workspaceFolder}/*"
+            "/app/**/*": "${workspaceFolder}/app/**/*"
           },
-        "localRoot": "${workspaceFolder}",
-        "remoteRoot": "/",
-        "protocol": "inspector"
-      }
+        "localRoot": "${workspaceFolder}/app",
+        "remoteRoot": "/usr/src/app",
+        "protocol": "inspector",
+        "restart": true,
+      },
     ],
 }
