@@ -18,6 +18,7 @@ import CONFIG from '../config/bot.json';
  */
 
 // 슬랙에서 슬랙앱에게 접근가능한 엔드포인트를 만들기 위해 웹서버(express)를 사용
+console.log("test 시작");
 const app = express();
 
 const slackEvents = createEventAdapter(CONFIG.SIGNING_SECRET);
@@ -31,6 +32,12 @@ slackEvents.on('message', async (event) => {
             text: '안녕하세요!',
             channel: event.channel,
         });
+    }
+    else if (event.text == '최가운') {
+      webClient.chat.postMessage({
+        text: '절 만들어주신 분이군요!',
+        channel: event.channel,
+    });
     }
 });
 
