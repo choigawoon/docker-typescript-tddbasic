@@ -1,12 +1,14 @@
 // TDD를 위해 추가해뒀던거
 export { Stack } from './stack';
 export { Calculator } from './calculator';
+export { SearchBot } from './searchbot';
 
 // 업데이트 된 src/index.ts
 import express from 'express';
 import { WebClient } from '@slack/web-api';
 import { createEventAdapter } from '@slack/events-api';
 import { createServer } from 'http';
+import { SearchBot } from './searchbot';
 
 // 생성한 슬랙앱에 대한 키값들
 import CONFIG from '../config/bot.json';
@@ -20,6 +22,7 @@ import CONFIG from '../config/bot.json';
 // 슬랙에서 슬랙앱에게 접근가능한 엔드포인트를 만들기 위해 웹서버(express)를 사용
 console.log("test 시작");
 const app = express();
+var bot = new SearchBot();
 
 const slackEvents = createEventAdapter(CONFIG.SIGNING_SECRET);
 const webClient = new WebClient(CONFIG.BOT_USER_OAUTH_ACCESS_TOKEN);
@@ -43,6 +46,14 @@ slackEvents.on('message', async (event) => {
       webClient.chat.postMessage({
         text: '아가',
         channel: event.channel,
+      });
+    }
+    else if (event.text.includes('검색!')) {
+      let query = bot.search(event.text);
+      webClient.chat.postMessage({
+        text: query,
+        channel: event.channel,
+        //as_user: true
       });
     }
 });

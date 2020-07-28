@@ -5,6 +5,21 @@
     "version": "0.2.0",
     "configurations": [
       {
+        "name": "타입스크립트 Mocha Tests",
+        "type": "node",
+        "request": "launch",
+        "program": "${workspaceFolder}/app/node_modules/mocha/bin/_mocha",
+        "args": [
+          "--require", "ts-node/register",
+          "--timeout", "999999",
+          "--colors", "--recursive",
+          "${workspaceFolder}/app/test/**/*.ts"
+        ],
+        "sourceMaps": true,
+        "cwd": "${workspaceFolder}/app",
+        "protocol": "inspector",
+      },
+      {
         "name": "타입스크립트 디버깅",
         "type": "node",
         "request": "launch",
